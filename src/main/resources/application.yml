@@ -1,0 +1,18 @@
+spring:
+  profiles: unittest
+
+---
+spring:
+  profiles: default
+
+server:
+    port: 8443
+    ssl:
+        key-store: token_service.p12
+        key-store-password: redjeeps
+        keyStoreType: PKCS12
+        keyAlias: token_service
+
+certpath:
+    privatekey: "/Users/q4vy/Source/java/token_service/src/main/resources/private_key.pem"
+    publickey: "/Users/q4vy/Source/java/token_service/src/main/resources/public_key.der"
