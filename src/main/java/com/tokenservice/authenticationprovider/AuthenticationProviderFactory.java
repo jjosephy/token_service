@@ -12,6 +12,9 @@ public class AuthenticationProviderFactory {
 			case Customer: 
 				provider = AuthProviderLocator.getInstance().getProvider("customer");
 				break;
+			case LDAP: 
+				provider = AuthProviderLocator.getInstance().getProvider("ldap");
+				break;
 			case Mobile: 
 				provider = AuthProviderLocator.getInstance().getProvider("mobile");
 				break;

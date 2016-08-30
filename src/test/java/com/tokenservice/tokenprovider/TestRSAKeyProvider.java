@@ -29,10 +29,10 @@ public class TestRSAKeyProvider implements RSAKeyProvider {
 			
 			this.keyGenerator = KeyPairGenerator.getInstance("RSA");
 			this.keyGenerator.initialize(1024);
-			KeyPair kp = keyGenerator.genKeyPair();
+			KeyPair kp = this.keyGenerator.genKeyPair();
 			this.publicKey = (RSAPublicKey)kp.getPublic();
 			this.privateKey = (RSAPrivateKey)kp.getPrivate();
-			this.signer = new RSASSASigner(privateKey);
+			this.signer = new RSASSASigner(this.privateKey);
 			this.verifier = new RSASSAVerifier(this.publicKey);
 		} catch (NoSuchAlgorithmException nsEx) {
 			// TODO: figure out how to handle this

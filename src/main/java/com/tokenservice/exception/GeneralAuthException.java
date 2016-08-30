@@ -36,7 +36,7 @@ public class GeneralAuthException extends AuthenticationException{
 	 * @param msg the detail message
 	 */
 	public GeneralAuthException(String msg) {
-		super("General Auth Exception");
+		super(msg);
 	}
 	
 	public int getErrorCode() {

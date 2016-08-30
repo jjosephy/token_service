@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Test Page</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+	function run() {
+		var s = '{"authType":"LDAP","applicationId":"C452AF6C-FB4B-4556-AE55-F6B08270F898","userName":"q","password":"q","apiKey":"89asdfas8998asdf","mobileId":"555-555-5555","id":"95ed1aaf-e7be-419d-9584-ac0611983f06"}'
+		$.ajax({
+			url : 'https://localhost:8443/token',
+			type : 'POST',
+			data : s,
+			headers : {
+				"Api-Version" : 1.0
+			},
+			success : function(data) {
+				alert('succes');
+			},
+			error : function(err) {
+				alert('err');
+			}
+		});
+	}
+</script>
+</head>
+<body>
+	<div>
+		<input type="text" /> <input type="password" /> <br>
+		<button onclick="run();">Authenticate</button>
+	</div>
+</body>
+</html>

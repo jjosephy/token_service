@@ -33,6 +33,7 @@ public class AuthProviderLocator {
 		this.providers.put("customer", new CustomerAuthProvider());
 		this.providers.put("online", new OnlineAuthProvider());
 		this.providers.put("default", new DefaultAuthProvider());
+		this.providers.put("ldap", new LDAPAuthProvider());
 	}
 	
 	/**

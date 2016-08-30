@@ -20,6 +20,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTParser;
 import com.tokenservice.authentication.AuthToken;
@@ -78,9 +79,12 @@ public class AuthenticationFilter extends GenericFilterBean {
 					model = ContractConverter.getAuthenticationModel(ctx);
 				} catch (UnsupportedAuthVersionException uex) {
 					this.entryPoint.commence(ctx, res, uex);
+					return; 
+				} catch(JsonParseException jsonEx) {
+					this.entryPoint.commence(ctx, res, new GeneralAuthException("Could not parse body"));
 					return;
 				} catch(Exception ex) {
-					this.entryPoint.commence(ctx, res, new GeneralAuthException());
+					this.entryPoint.commence(ctx, res, new GeneralAuthException("general auth exception"));
 					return;
 				}
 				
@@ -126,6 +130,9 @@ public class AuthenticationFilter extends GenericFilterBean {
 			} catch (FileNotFoundException fEx) {
 				this.entryPoint.commence(ctx, res, new InvalidTokenException(fEx.getMessage()));
 				return;
+			}
+			catch (IllegalArgumentException argEx) {
+				this.entryPoint.commence(ctx, res, new InvalidTokenException("invalid token"));
 			}
 			catch (Exception e) {
 				this.entryPoint.commence(ctx, res, new InvalidTokenException(e.getMessage()));

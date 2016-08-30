@@ -27,6 +27,10 @@ public class ConfigManager {
 		return instance;
 	}
 	
+	public String getLDAPHost() {
+		return this.getProperty("ldap.host").toString();
+	}
+	
 	public String getCertPrivateKey() {
 		return this.getProperty("certpath.privatekey").toString();
 	}

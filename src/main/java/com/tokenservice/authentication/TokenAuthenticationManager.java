@@ -31,18 +31,18 @@ public class TokenAuthenticationManager implements AuthenticationManager {
 		
 		Date expirationTime = claims.getExpirationTime();
 		if (expirationTime == null || expirationTime.before(referenceTime)) {
-		    throw new TokenExpiredException("The token is expired");
+			throw new TokenExpiredException("The token is expired");
 		}
 		
 		Date notBeforeTime = claims.getNotBeforeTime();
 		if (notBeforeTime == null || notBeforeTime.after(referenceTime)) {
-		    throw new InvalidTokenException("Not before is after sysdate");
+			throw new InvalidTokenException("Not before is after sysdate");
 		}
 		
 		String issuerReference = "https://nordstrom.net";
 		String issuer = claims.getIssuer();
 		if (!issuerReference.equals(issuer)) {
-		    throw new InvalidTokenException("Invalid issuer");
+			throw new InvalidTokenException("Invalid issuer");
 		}
 		
 		jwtToken.setAuthenticated(true);

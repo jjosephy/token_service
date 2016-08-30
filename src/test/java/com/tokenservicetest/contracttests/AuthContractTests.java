@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tokenservice.configuration.AuthType;
 import com.tokenservice.contract.AuthContractV1;
+import com.tokenservice.contract.ErrorContract;
 
 public class AuthContractTests {
 	
@@ -30,6 +31,28 @@ public class AuthContractTests {
 			System.out.println(json);
 		} catch (JsonProcessingException e) {
 			fail("json serialization failed");
+		}
+	}
+	
+	@Test
+	public void TestErrorContract_V1_Success_Valid() {
+		ErrorContract err = new ErrorContract(1000, "error message");
+		ObjectMapper m = new ObjectMapper();
+		String json = null;
+		try {
+			json = m.writeValueAsString(err);
+			assertTrue("len is invalid", json.length() > 0);
+			System.out.println(json);
+		} catch (JsonProcessingException e) {
+			fail("json serialization failed");
+		}
+		
+		try {
+			ErrorContract error = m.readValue(json, ErrorContract.class);
+			assertTrue("Invalid Code", error.getCode() == 1000);
+			assertTrue("Invalid Message", error.getMessage().equalsIgnoreCase("error message"));
+		} catch (Exception e) {
+			fail("Failed deserializing error" + e.getMessage());
 		}
 		
 	}

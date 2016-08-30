@@ -7,7 +7,7 @@ import java.util.Set;
 import com.tokenservice.model.AuthenticationModel;
 
 /**
- * Mobile Auth Provider to enable authentication via a Mobile Id. 
+ * Mobile Authentication Provider to enable authentication via a Mobile Id. 
  * 
  * @author q4vy
  *
@@ -27,9 +27,9 @@ public class MobileAuthProvider
 	public MobileAuthProvider() {
 		
 	}
-
+	
 	/**
-	 * Implementation of Authentication Provider Interface for Mobile Auth
+	 * Implementation of Authentication Provider Interface for Mobile Authentication
 	 */
 	@Override
 	public boolean isAuthenticated(AuthenticationModel model) {
